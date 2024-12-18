@@ -1,6 +1,16 @@
 import streamlit as st
 import pandas as pd
-from matplot import pyplot as plt
+
+import subprocess
+import sys
+
+# Ensure matplotlib is installed
+try:
+    import matplotlib
+except ImportError:
+    # Install matplotlib if not already installed
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
+    print("Matplotlib installed successfully!")
 
 
 def read_sales_data(file_path, sheet_name):

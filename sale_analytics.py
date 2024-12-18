@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+from matplot import matplotlib.pyplot as plt
+
 
 def read_sales_data(file_path, sheet_name):
     df = pd.read_excel(file_path, sheet_name)

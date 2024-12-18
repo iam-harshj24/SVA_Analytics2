@@ -186,7 +186,7 @@ def main():
                 if selected_recommendation != 'All':
                     filtered_data = filtered_data[filtered_data['Restocking_Recommendation'] == selected_recommendation]
 
-                st.dataframe(filtered_data[['Date', 'Total_inventory', 'ASIN', 'Product Name_x', 'Sales', 'Daily_Retail_Rate', 'Days_of_Inventory', 'Restocking_Recommendation']])
+                st.dataframe(filtered_data[['Date', 'Total_inventory', 'ASIN', 'Product Name_x', 'Sales', 'Daily_Retail_Rate', 'Days_of_Inventory', 'Restocking_Recommendation@7']])
 
                 
 

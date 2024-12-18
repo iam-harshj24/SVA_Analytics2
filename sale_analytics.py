@@ -158,7 +158,8 @@ def main():
 
             with tab2:
                 st.header('Inventory Status')
-              selected_asin = st.selectbox(
+
+                selected_asin = st.selectbox(
                     'Select ASIN for Detailed View',
                     ['All'] + list(inventory_status['ASIN'].unique()),
                     key='inventory_asin_select'
@@ -174,7 +175,8 @@ def main():
                     'Select Restocking Recommendation',
                     ['All'] + list(inventory_status['Restocking_Recommendation'].unique()),
                     key='inventory_recommendation_select'
-       
+                )
+
                 filtered_data = inventory_status.copy()
 
                 if selected_asin != 'All':
@@ -187,8 +189,6 @@ def main():
                     filtered_data = filtered_data[filtered_data['Restocking_Recommendation'] == selected_recommendation]
 
                 st.dataframe(filtered_data[['Date', 'Total_inventory', 'ASIN', 'Product Name_x', 'Sales', 'Daily_Retail_Rate', 'Days_of_Inventory', 'Restocking_Recommendation']])
-
-                
 
 
         except Exception as e:

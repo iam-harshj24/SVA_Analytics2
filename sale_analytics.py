@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from matplot import matplotlib.pyplot as plt
+from matplot import pyplot as plt
 
 
 def read_sales_data(file_path, sheet_name):

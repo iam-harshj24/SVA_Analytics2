@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-
 import os
 os.system("pip install -r requirements.txt")
 
@@ -63,7 +62,7 @@ def calculate_moving_averages(merged_data):
 
 def calculate_inventory_status(drr_df, inventory_df):
     inventory_status = pd.merge(inventory_df, drr_df, on='ASIN', how='left')
-    inventory_status['Days_of_Inventory'] = inventory_status['Total_inventory'] / inventory_status['Daily_Retail_Rate']
+    inventory_status['Days_of_Inventory'] = inventory_status['Total_inventory'] / inventory_status['Daily_Retail_Rate'].round()
 
     def get_restocking_recommendation(days):
         if pd.isna(days):
@@ -184,13 +183,13 @@ def main():
  
                 st.dataframe(product_data[['Date', 'Total_inventory', 'ASIN', 'Product Name_x', 'Sales', 'Daily_Retail_Rate', 'Days_of_Inventory', 'Restocking_Recommendation']])
     
-               
                 st.subheader('Restocking Recommendations Distribution')
                 restock_counts = product_data['Restocking_Recommendation'].value_counts()
                 fig, ax = plt.subplots()
                 ax.pie(restock_counts, labels=restock_counts.index, autopct='%1.1f%%')
                 ax.set_title('Restocking Recommendations')
                 st.pyplot(fig)
+
 
         except Exception as e:
             st.error(f"An error occurred: {e}")

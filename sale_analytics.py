@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 
-
+import os
+os.system("pip install -r requirements.txt")
 
 def read_sales_data(file_path, sheet_name):
     df = pd.read_excel(file_path, sheet_name)

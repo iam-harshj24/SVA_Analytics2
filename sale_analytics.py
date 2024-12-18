@@ -158,31 +158,36 @@ def main():
 
             with tab2:
                 st.header('Inventory Status')
-   
-                selected_asin = st.selectbox(
+              selected_asin = st.selectbox(
                     'Select ASIN for Detailed View',
                     ['All'] + list(inventory_status['ASIN'].unique()),
                     key='inventory_asin_select'
                 )
-    
-                if selected_asin != 'All':
-                    asin_data = inventory_status[inventory_status['ASIN'] == selected_asin]
-                else:
-                    asin_data = inventory_status  # If 'All' is selected, use the entire dataset
-    
+
                 selected_date = st.selectbox(
                     'Select Date for Detailed View',
-                    ['All'] + list(asin_data['Date'].unique()),
+                    ['All'] + list(inventory_status['Date'].unique()),
                     key='inventory_date_select'
                 )
-    
+
+                selected_recommendation = st.selectbox(
+                    'Select Restocking Recommendation',
+                    ['All'] + list(inventory_status['Restocking_Recommendation'].unique()),
+                    key='inventory_recommendation_select'
+       
+                filtered_data = inventory_status.copy()
+
+                if selected_asin != 'All':
+                    filtered_data = filtered_data[filtered_data['ASIN'] == selected_asin]
+
                 if selected_date != 'All':
-                    product_data = asin_data[asin_data['Date'] == selected_date]
-                else:
-                    product_data = asin_data  # Only filter by ASIN or show all data
- 
-                st.dataframe(product_data[['Date', 'Total_inventory', 'ASIN', 'Product Name_x', 'Sales', 'Daily_Retail_Rate', 'Days_of_Inventory', 'Restocking_Recommendation']])
-    
+                    filtered_data = filtered_data[filtered_data['Date'] == selected_date]
+
+                if selected_recommendation != 'All':
+                    filtered_data = filtered_data[filtered_data['Restocking_Recommendation'] == selected_recommendation]
+
+                st.dataframe(filtered_data[['Date', 'Total_inventory', 'ASIN', 'Product Name_x', 'Sales', 'Daily_Retail_Rate', 'Days_of_Inventory', 'Restocking_Recommendation']])
+
                 st.subheader('Restocking Recommendations Distribution')
                 restock_counts = product_data['Restocking_Recommendation'].value_counts()
                 fig, ax = plt.subplots()

@@ -1,16 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-import subprocess
-import sys
-
-# Ensure matplotlib is installed
-try:
-    import matplotlib
-except ImportError:
-    # Install matplotlib if not already installed
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "matplotlib"])
-    print("Matplotlib installed successfully!")
 
 
 def read_sales_data(file_path, sheet_name):
@@ -193,12 +183,6 @@ def main():
  
                 st.dataframe(product_data[['Date', 'Total_inventory', 'ASIN', 'Product Name_x', 'Sales', 'Daily_Retail_Rate', 'Days_of_Inventory', 'Restocking_Recommendation']])
     
-                st.subheader('Restocking Recommendations Distribution')
-                restock_counts = product_data['Restocking_Recommendation'].value_counts()
-                fig, ax = plt.subplots()
-                ax.pie(restock_counts, labels=restock_counts.index, autopct='%1.1f%%')
-                ax.set_title('Restocking Recommendations')
-                st.pyplot(fig)
 
 
         except Exception as e:

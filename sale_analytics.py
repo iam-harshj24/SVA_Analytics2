@@ -188,12 +188,7 @@ def main():
 
                 st.dataframe(filtered_data[['Date', 'Total_inventory', 'ASIN', 'Product Name_x', 'Sales', 'Daily_Retail_Rate', 'Days_of_Inventory', 'Restocking_Recommendation']])
 
-                st.subheader('Restocking Recommendations Distribution')
-                restock_counts = product_data['Restocking_Recommendation'].value_counts()
-                fig, ax = plt.subplots()
-                ax.pie(restock_counts, labels=restock_counts.index, autopct='%1.1f%%')
-                ax.set_title('Restocking Recommendations')
-                st.pyplot(fig)
+                
 
 
         except Exception as e:

@@ -63,8 +63,8 @@ def calculate_moving_averages(merged_data):
 
 def calculate_inventory_status(drr_df, inventory_df):
     inventory_status = pd.merge(inventory_df, drr_df, on='ASIN', how='left')
-    inventory_status['Days_of_Inventory'] = inventory_status['Total_inventory'] / inventory_status['Daily_Retail_Rate'].round()
-
+    inventory_status['Days_of_Inventory'] = inventory_status['Total_inventory'] / inventory_status['Daily_Retail_Rate']
+    inventory_status['Days_of_Inventory'] = inventory_status['Days_of_Inventory'].round()
     def get_restocking_recommendation(days):
         if pd.isna(days):
             return 'No Sales Data'
